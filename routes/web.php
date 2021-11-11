@@ -18,6 +18,6 @@ Route::get('/', [HomeController::class, 'index'])->name('welcome');
 Route::get('/login', [HomeController::class, 'login'])->name('login');
 Route::get('/register', [HomeController::class, 'register'])->name('register');
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
+Route::get('/dashboard', function () {
+    return view('dashboard.dashboard');
 })->name('dashboard');
