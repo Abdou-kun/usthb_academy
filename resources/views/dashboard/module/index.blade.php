@@ -1,18 +1,30 @@
 @extends('layouts.layout')
 
-@section('title', 'Home')
+@section('title', 'Modules')
 
 @section('css')
+
 <link href='{{ asset('css/sb-admin-2.min.css') }}' rel="stylesheet"/>
+<link href='{{ asset('js/dataTables.bootstrap4.min.css') }}' rel="stylesheet">
+
 @endsection
 
 @section('js')
 <script src='{{ asset('js/sb-admin-2.min.js') }}'></script>
+<script src='{{ asset('js/dataTables.bootstrap4.min.js') }}'></script>
+<script src='{{ asset('js/jquery.dataTables.min.js') }}'></script>
+
 @endsection
 
 
 @section('content')
+    <!-- Custom styles for this template -->
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
 
+    <!-- Custom styles for this page -->
+    <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+
+</head>
 
 <body id="page-top">
 
@@ -107,6 +119,7 @@
 
                 <!-- Topbar -->
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
 
@@ -162,56 +175,55 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-                    </div>
+                    <h1 class="h3 mb-2 text-gray-800">Modules Table</h1>
 
-                    <!-- Content Row -->
-                    <div class="row">
-
-                        <!-- Content Column -->
-                        <div class="col-lg-12 mb-4">
-
-                            <!-- Color System -->
-                            <div class="row">
-                                <div class="col-lg-6 mb-4">
-                                    <div class="card bg-primary text-white shadow">
-                                        <div class="card-body">
-                                            <a href='{{ route("etudiant.show") }}' style='color:white;'>Etudients</a>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-6 mb-4">
-                                    <div class="card bg-primary text-white shadow">
-                                        <div class="card-body">
-                                            <a href='{{ route("enseignant.show") }}' style='color:white;'>Enseignants</a>
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                                <div class="col-lg-6 mb-4">
-                                    <div class="card bg-primary text-white shadow">
-                                        <div class="card-body">
-                                            <a href='{{ route("module.show") }}' style='color:white;'>Modules</a>                                        </div>
-                                    </div>
-                                </div>
+                    <!-- DataTales Example -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">DataTables</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>Code</th>
+                                            <th>Nom</th>
+                                            <th>Coef</th>
+                                            <th>Code Enseignant</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($modules as $module )
+                                        <tr>
+                                            <td>{{ $module->code_m }}</td>
+                                            <td>{{ $module->libelle_m }}</td>
+                                            <td>{{ $module->coef }}</td>
+                                            <td>{{ $module->code_ens }}</td>
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
 
                 </div>
                 <!-- /.container-fluid -->
-
+            <div class="container center">
+                    <button type="button" class="btn btn-success" onclick="window.location.href='{{ route('module.create') }}';">Ajouter</button>
+                    <button type="button" class="btn btn-primary" onclick="window.location.href='{{ route('module.update') }}';">Modifer</button>
+                    <button type="button" class="btn btn-danger" onclick="window.location.href='{{ route('module.delete') }}';">Supprimer</button>
+                </div>
             </div>
+
             <!-- End of Main Content -->
 
             <!-- Footer -->
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; ALLOUI Abdelraouf 2021</span>
+                        <span>Copyright &copy; ALLOUI Abdelaraouf 2022</span>
                     </div>
                 </div>
             </footer>
@@ -222,13 +234,6 @@
 
     </div>
     <!-- End of Page Wrapper -->
-
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
-
-    <!-- Logout Modal-->
 
 </body>
 

@@ -1,20 +1,33 @@
 <!DOCTYPE html>
 <!-- Designined by ALLOUI Abdelraouf -->
-<html lang="en" dir="ltr">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="UTF-8">
-        <title> Glassmorphism USTHB Academy </title>
+        <title> {{ config('app.name', 'USTHB Academy') }} </title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="csrf-token" content="{{ csrf_token() }}"/>
         <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     </head>
     <body>
         <header>
             <nav class="navbar">
                 <div class="logo"><a href="{{ route('welcome') }}">USTHB ACADEMY></a></div>
-                <div class="buttons">
-                    <a href="{{ route('login') }}">Login</a>
-                    <a href="{{ route('register') }}">Register</a>
-                </div>
+                @guest
+                    <div class="buttons">
+                        <a href="{{ route('login') }}">Login</a>
+                        <a href="{{ route('register') }}">Register</a>
+                    </div>
+                @endguest
+
+                @auth
+                    <div class="buttons">
+                        <a href="{{ route('dashboard') }}">Dashboard</a>
+                        <a href='{{ route('logout')}}' onclick="event.preventDefault(); document.getElementById('form_logout').submit();">Log out</a>
+                            <form id='form_logout'action='{{ route('logout') }}' style="display: none" method="POST">
+                                @csrf
+                            </form>
+                    </div>
+                @endauth
             </nav>
             <div class="content">
                 <div class="text-content">
