@@ -23,12 +23,13 @@
     </div>
 
     <div class="row">
-        <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+        <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" method="GET" action="{{ route('module.index') }}">
+            @csrf
             <div class="input-group my-4">
                 <input type="text" class="form-control bg-white border-0 small" placeholder="Search with Code ..."
-                                aria-label="Search" aria-describedby="basic-addon2">
+                                aria-label="Search" aria-describedby="basic-addon2" name="code_m">
                 <div class="input-group-append">
-                    <button class="btn btn-primary" type="button">
+                    <button class="btn btn-primary" type="submit">
                         <i class="fas fa-search fa-sm"></i>
                     </button>
                 </div>
@@ -36,10 +37,11 @@
         </form>
         <div class="col-md-8 order-md-1">
         <h4 class="mb-3">Enter the informations:</h4>
-        <form class="needs-validation" novalidate>
+        <form class="needs-validation" method="POST" action="{{ route('module.store') }}">
+            @csrf
             <div class="mb-3">
             <label for="address">Code</label>
-            <input type="text" class="form-control" id="code" placeholder="Ex: 123" required>
+            <input type="text" class="form-control" id="code_m" name="code_m" placeholder="Ex: 123" required>
             <div class="invalid-feedback">
                 Please enter your code
             </div>
@@ -47,7 +49,7 @@
 
             <div class="mb-3">
             <label for="address">Libelle</label>
-            <input type="text" class="form-control" id="code" placeholder="Ex: SI 2" required>
+            <input type="text" class="form-control" id="libelle_m" name="libelle_m" placeholder="Ex: SI 2" required>
             <div class="invalid-feedback">
                 Please enter your Libelle
             </div>
@@ -59,22 +61,23 @@
 
             <div class="col-md-3 mb-3">
                 <label for="zip">Coef</label>
-                <input type="text" class="form-control" id="" placeholder="" required>
+                <input type="text" class="form-control" id="" name="coef" placeholder="" required>
                 <div class="invalid-feedback">
                 Coef required.
                 </div>
             </div>
             <div class="col-md-3 mb-3">
                 <label for="zip">Code Enseignant</label>
-                <input type="text" class="form-control" id="" placeholder="" required>
+                <input type="text" class="form-control" id="" name="code_ens" placeholder="" required>
                 <div class="invalid-feedback">
                 Code Enseignant required.
                 </div>
             </div>
             </div>
+                    <button type="submit" class="btn btn-success">Ajouter</button>
+                    <button type="button" class="btn btn-danger" onclick="window.location.href='{{ route('module.index') }}';">Annuler</button>
         </form>
-                    <button type="button" class="btn btn-success" onclick="window.location.href='{{ route('module.create') }}';">Ajouter</button>
-                    <button type="button" class="btn btn-danger" onclick="window.location.href='{{ route('module.show') }}';">Annuler</button>
+
             </div>
     </div>
 

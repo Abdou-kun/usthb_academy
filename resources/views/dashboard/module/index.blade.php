@@ -62,7 +62,7 @@
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="{{ route('etudiant.show') }}" data-toggle="collapse" data-target="#collapseTwo"
+                <a class="nav-link collapsed" href="{{ route('etudiant.index') }}" data-toggle="collapse" data-target="#collapseTwo"
                     aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-fw fa-cog"></i>
                     <span>Etudiants</span>
@@ -90,7 +90,7 @@
             </li> --}}
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="{{ route("module.show") }}" data-toggle="collapse" data-target="#collapseUtilities"
+                <a class="nav-link collapsed" href="{{ route("module.index") }}" data-toggle="collapse" data-target="#collapseUtilities"
                     aria-expanded="true" aria-controls="collapseUtilities">
                     <i class="fas fa-fw fa-wrench"></i>
                     <span>Modules</span>
@@ -212,7 +212,7 @@
                 <!-- /.container-fluid -->
             <div class="container center">
                     <button type="button" class="btn btn-success" onclick="window.location.href='{{ route('module.create') }}';">Ajouter</button>
-                    <button type="button" class="btn btn-primary" onclick="window.location.href='{{ route('module.update') }}';">Modifer</button>
+                    <button type="button" class="btn btn-primary" onclick="window.location.href='{{ route('module.index') }}';">Modifer</button>
                     <button type="button" class="btn btn-danger" onclick="window.location.href='{{ route('module.delete') }}';">Supprimer</button>
                 </div>
             </div>

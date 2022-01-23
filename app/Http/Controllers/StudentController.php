@@ -26,7 +26,7 @@ class StudentController extends Controller
      */
     public function create()
     {
-
+        return view('dashboard.etudiant.create');
     }
 
     /**
@@ -37,7 +37,25 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'matricule' => 'required',
+            'nom' => 'required',
+            'prenom' => 'required',
+            'groupe' => 'required',
+            'code_s' => 'required'
+        ]);
+
+        $student = new Student();
+
+        $student->matricule = $request->matricule;
+        $student->nom = $request->nom;
+        $student->prenom = $request->prenom;
+        $student->groupe = $request->groupe;
+        $student->code_s = $request->code_s;
+
+        $student->save();
+
+        return redirect()->route('etudiant.index')->with('success', 'Student has been created successfuly');
     }
 
     /**
@@ -48,7 +66,9 @@ class StudentController extends Controller
      */
     public function show(Student $student)
     {
-        //
+        return view('etudient.show', [
+            'student' => $student
+        ]);
     }
 
     /**
@@ -59,7 +79,9 @@ class StudentController extends Controller
      */
     public function edit(Student $student)
     {
-        //
+        return view('dashboard.etudiant.update', [
+            'student' => $student
+        ]);
     }
 
     /**
@@ -69,9 +91,25 @@ class StudentController extends Controller
      * @param  \App\Models\Student  $student
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Student $student)
+    public function update(Request $request, $matricule)
     {
-        //
+        $request->validate([
+            'matricule' => 'required',
+            'nom' => 'required',
+            'prenom' => 'required',
+            'groupe' => 'required',
+            'code_s' => 'required'
+        ]);
+
+        $student = Student::find($matricule);
+
+        $student->matricule = $request->matricule;
+        $student->nom = $request->nom;
+        $student->prenom = $request->prenom;
+        $student->groupe = $request->groupe;
+        $student->code_s = $request->code_s;
+
+        return redirect()->route('etudiant.index')->with('success', 'student has been updated successfully');
     }
 
     /**
@@ -82,15 +120,8 @@ class StudentController extends Controller
      */
     public function destroy(Student $student)
     {
-        //
-    }
-
-    public function createView() {
-        return view('dashboard.etudiant.create');
-    }
-
-    public function updateView() {
-        return view('dashboard.etudiant.update');
+        $student->delete();
+        return redirect()->route('etudiant.index')->with('success', 'student has been deleted successfully');
     }
 
     public function deleteView() {

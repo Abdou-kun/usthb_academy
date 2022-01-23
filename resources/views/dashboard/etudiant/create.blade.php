@@ -23,12 +23,13 @@
     </div>
 
     <div class="row">
-        <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+        <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" method="GET" action="{{ route('etudiant.index') }}">
+            @csrf
             <div class="input-group my-4">
                 <input type="text" class="form-control bg-white border-0 small" placeholder="Search with Matricule ..."
                                 aria-label="Search" aria-describedby="basic-addon2">
                 <div class="input-group-append">
-                    <button class="btn btn-primary" type="button">
+                    <button class="btn btn-primary" type="submit">
                         <i class="fas fa-search fa-sm"></i>
                     </button>
                 </div>
@@ -36,10 +37,11 @@
         </form>
         <div class="col-md-8 order-md-1">
         <h4 class="mb-3">Enter the informations:</h4>
-        <form class="needs-validation" novalidate>
+        <form class="needs-validation" method="POST" action="{{ route('etudiant.store') }}">
+            @csrf
             <div class="mb-3">
             <label for="address">Matricule</label>
-            <input type="text" class="form-control" id="code" placeholder="Ex: 123" required>
+            <input type="text" class="form-control" name="matricule" id="matricule" placeholder="Ex: 123" required>
             <div class="invalid-feedback">
                 Please enter your Matricule
             </div>
@@ -47,15 +49,15 @@
 
             <div class="row">
             <div class="col-md-6 mb-3">
-                <label for="firstName">First name</label>
-                <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
+                <label for="firstName">Nom</label>
+                <input type="text" class="form-control" id="nom" name="nom" placeholder="" value="" required>
                 <div class="invalid-feedback">
                 Valid first name is required.
                 </div>
             </div>
             <div class="col-md-6 mb-3">
-                <label for="lastName">Last name</label>
-                <input type="text" class="form-control" id="lastName" placeholder="" value="" required>
+                <label for="lastName">Prénom</label>
+                <input type="text" class="form-control" id="prenom" name="prenom" placeholder="" value="" required>
                 <div class="invalid-feedback">
                 Valid last name is required.
                 </div>
@@ -66,22 +68,23 @@
 
             <div class="col-md-3 mb-3">
                 <label for="zip">Section</label>
-                <input type="text" class="form-control" id="section" placeholder="" required>
+                <input type="text" class="form-control" id="code_s" name="code_s" placeholder="" required>
                 <div class="invalid-feedback">
                 Section required.
                 </div>
             </div>
             <div class="col-md-3 mb-3">
                 <label for="zip">Groupe</label>
-                <input type="text" class="form-control" id="groupe" placeholder="" required>
+                <input type="text" class="form-control" id="groupe" name="groupe" placeholder="" required>
                 <div class="invalid-feedback">
                 Groupe required.
                 </div>
             </div>
             </div>
-                    <button type="button" class="btn btn-success" onclick="window.location.href='{{ route('enseignant.create') }}';">Ajouter</button>
-                    <button type="button" class="btn btn-danger" onclick="window.location.href='{{ route('etudiant.show') }}';">Annuler</button>
-            </div>
+                    <button type="submit" class="btn btn-success">Ajouter</button>
+                    <button type="button" class="btn btn-danger" onclick="window.location.href='{{ route('etudiant.index') }}';">Annuler</button>
+            </form>
+        </div>
     </div>
 
     <footer class="my-5 pt-5 text-muted text-center text-small">

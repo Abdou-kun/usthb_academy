@@ -50,7 +50,7 @@
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="{{ route('etudiant.show') }}" data-toggle="collapse" data-target="#collapseTwo"
+                <a class="nav-link collapsed" href="{{ route('etudiant.index') }}" data-toggle="collapse" data-target="#collapseTwo"
                     aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-fw fa-cog"></i>
                     <span>Etudiants</span>
@@ -78,7 +78,7 @@
             </li> --}}
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="{{ route("module.show") }}" data-toggle="collapse" data-target="#collapseUtilities"
+                <a class="nav-link collapsed" href="{{ route("module.index") }}" data-toggle="collapse" data-target="#collapseUtilities"
                     aria-expanded="true" aria-controls="collapseUtilities">
                     <i class="fas fa-fw fa-wrench"></i>
                     <span>Modules</span>
@@ -177,7 +177,7 @@
                                 <div class="col-lg-6 mb-4">
                                     <div class="card bg-primary text-white shadow">
                                         <div class="card-body">
-                                            <a href='{{ route("etudiant.show") }}' style='color:white;'>Etudients</a>
+                                            <a href='{{ route("etudiant.index") }}' style='color:white;'>Etudients</a>
                                         </div>
                                     </div>
                                 </div>
@@ -194,7 +194,7 @@
                                 <div class="col-lg-6 mb-4">
                                     <div class="card bg-primary text-white shadow">
                                         <div class="card-body">
-                                            <a href='{{ route("module.show") }}' style='color:white;'>Modules</a>                                        </div>
+                                            <a href='{{ route("module.index") }}' style='color:white;'>Modules</a>                                        </div>
                                     </div>
                                 </div>
                             </div>

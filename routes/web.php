@@ -21,6 +21,9 @@ use App\Models\Enseignant;
 
 Route::get('/', [HomeController::class, 'index'])->name('welcome');
 
+// Route::resource('/student', [StudentController::class]);
+
+
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [LoginController::class, 'index'])->name('dashboard');
 
@@ -30,18 +33,27 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::prefix('/etudiant')->group(function () {
-        Route::get('/', [StudentController::class, 'index'])->name('etudiant.show');
-        Route::get('/create', [StudentController::class, 'createView'])->name('etudiant.create');
-        Route::get('/update', [StudentController::class, 'updateView'])->name('etudiant.update');
+        Route::get('/', [StudentController::class, 'index'])->name('etudiant.index');
+        Route::get('/create', [StudentController::class, 'create'])->name('etudiant.create');
+        Route::post('/create', [StudentController::class, 'store'])->name('etudiant.store');
+        Route::get('/{matricule}/show', [StudentController::class, 'show'])->name('etudiant.show');
+        Route::get('/{matricule}/edit', [StudentController::class, 'edit'])->name('etudiant.edit');
+        Route::patch('/{matricule}/update', [StudentController::class, 'update'])->name('etudiant.update');
         Route::get('/delete', [StudentController::class, 'deleteView'])->name('etudiant.delete');
-
+        Route::delete('/{matricule}/delete', [StudentController::class, 'destroy'])->name('etudiant.destroy');
     });
+
 
     Route::prefix('/module')->group(function () {
-        Route::get('/', [ModuleController::class, 'index'])->name('module.show');
-        Route::get('/create', [ModuleController::class, 'createView'])->name('module.create');
-        Route::get('/update', [ModuleController::class, 'updateView'])->name('module.update');
+        Route::get('/', [ModuleController::class, 'index'])->name('module.index');
+        Route::get('/create', [ModuleController::class, 'create'])->name('module.create');
+        Route::post('/create', [ModuleController::class, 'store'])->name('module.store');
+        Route::get('/{code_m}/show', [ModuleController::class, 'show'])->name('module.show');
+        Route::get('/update', [ModuleController::class, 'edite'])->name('module.edite');
+        Route::patch('/{code_m}/update', [ModuleController::class, 'update'])->name('module.update');
         Route::get('/delete', [ModuleController::class, 'deleteView'])->name('module.delete');
+        Route::delete('/{code_m}/delete', [ModuleController::class, 'destroy'])->name('module.destroy');
     });
 });
-// [TO DO] : study route groupe notion
+
+// [TO DO] : Modify option
