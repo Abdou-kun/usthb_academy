@@ -62,11 +62,11 @@ class ModuleController extends Controller
      * @param  \App\Models\Module  $module
      * @return \Illuminate\Http\Response
      */
-    public function show(Module $module)
+    public function show($code_m)
     {
-        return view('dashboard.module.show', [
-            'module' => $module
-        ]);
+        $module = Module::query()->where('code_m', 'like', "%{$code_m}%")->get()->first();
+
+        return view('dashboard.module.show', ['module' => $module]);
     }
 
     /**
@@ -75,12 +75,6 @@ class ModuleController extends Controller
      * @param  \App\Models\Module  $module
      * @return \Illuminate\Http\Response
      */
-    public function edit(Module $module)
-    {
-        return view('dashboard.module.update', [
-            'module' => $module
-        ]);
-    }
 
     /**
      * Update the specified resource in storage.
@@ -91,19 +85,14 @@ class ModuleController extends Controller
      */
     public function update(Request $request, $code_m)
     {
-        $request->validate([
-            'code_m' => 'required',
-            'libelle_m' => 'required',
-            'coef' => 'required',
-            'code_ens' => 'required'
-        ]);
-
         $module = Module::find($code_m);
 
         $module->code_m = $request->code_m;
         $module->libelle_m = $request->libelle_m;
         $module->coef = $request->coef;
         $module->code_ens = $request->code_ens;
+
+        $module->save();
 
         return redirect()->route('module.index')->with('success', 'module has been updated successfully');
     }
@@ -114,14 +103,33 @@ class ModuleController extends Controller
      * @param  \App\Models\Module  $module
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Module $module)
+    public function destroy($code_m)
     {
+        $module = Module::find($code_m);
         $module->delete();
         return redirect()->route('module.index')->with('success', 'module has been deleted successfully');
     }
 
-    public function deleteView()
+    public function deleteView($code_m)
     {
-        return view('dashboard.module.delete');
+        $module = Module::find($code_m);
+
+        return view('dashboard.module.delete', ['module' => $module]);
+    }
+
+    public function search(Request $request)
+    {
+
+        $key = trim($request->get('search'));
+        $module = Module::find($key);
+
+        return redirect()->route('module.show', [
+            'code_m' => $module->code_m
+        ]);
+    }
+
+    public function searchView()
+    {
+        return view('dashboard.module.search');
     }
 }

@@ -212,8 +212,8 @@
                 <!-- /.container-fluid -->
             <div class="container center">
                     <button type="button" class="btn btn-success" onclick="window.location.href='{{ route('module.create') }}';">Ajouter</button>
-                    <button type="button" class="btn btn-primary" onclick="window.location.href='{{ route('module.index') }}';">Modifer</button>
-                    <button type="button" class="btn btn-danger" onclick="window.location.href='{{ route('module.delete') }}';">Supprimer</button>
+                    <button type="button" class="btn btn-primary" onclick="window.location.href='{{ route('module.search') }}';">Modifer</button>
+                    <button type="button" class="btn btn-danger" onclick="window.location.href='{{ route('module.search') }}';">Supprimer</button>
                 </div>
             </div>
 

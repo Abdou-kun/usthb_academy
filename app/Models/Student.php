@@ -19,6 +19,8 @@ class Student extends Model
         'code_s'
     ];
 
+    protected $primaryKey = 'matricule';
+
     public function section()
     {
         return $this->belongsTo(Section::class, 'code_s');

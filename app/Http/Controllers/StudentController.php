@@ -64,9 +64,11 @@ class StudentController extends Controller
      * @param  \App\Models\Student  $student
      * @return \Illuminate\Http\Response
      */
-    public function show(Student $student)
+    public function show($matricule)
     {
-        return view('etudient.show', [
+        $student = Student::find($matricule);
+
+        return view('dashboard.etudiant.show', [
             'student' => $student
         ]);
     }
@@ -77,12 +79,6 @@ class StudentController extends Controller
      * @param  \App\Models\Student  $student
      * @return \Illuminate\Http\Response
      */
-    public function edit(Student $student)
-    {
-        return view('dashboard.etudiant.update', [
-            'student' => $student
-        ]);
-    }
 
     /**
      * Update the specified resource in storage.
@@ -93,14 +89,6 @@ class StudentController extends Controller
      */
     public function update(Request $request, $matricule)
     {
-        $request->validate([
-            'matricule' => 'required',
-            'nom' => 'required',
-            'prenom' => 'required',
-            'groupe' => 'required',
-            'code_s' => 'required'
-        ]);
-
         $student = Student::find($matricule);
 
         $student->matricule = $request->matricule;
@@ -109,7 +97,9 @@ class StudentController extends Controller
         $student->groupe = $request->groupe;
         $student->code_s = $request->code_s;
 
-        return redirect()->route('etudiant.index')->with('success', 'student has been updated successfully');
+        $student->save();
+
+        return redirect()->route('etudiant.index')->with('success', 'student has been updated successfully');;
     }
 
     /**
@@ -118,13 +108,32 @@ class StudentController extends Controller
      * @param  \App\Models\Student  $student
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Student $student)
+    public function destroy($matricule)
     {
+        $student = Student::find($matricule);
         $student->delete();
+
         return redirect()->route('etudiant.index')->with('success', 'student has been deleted successfully');
     }
 
-    public function deleteView() {
-        return view('dashboard.etudiant.delete');
+    public function deleteView($matricule) {
+
+        $student = Student::find($matricule);
+
+        return view('dashboard.etudiant.delete', ['student' => $student]);
+    }
+
+    public function search(Request $request) {
+
+        $key = trim($request->get('search'));
+        $student = Student::query()->where('matricule', 'like', "%{$key}%")->get()->first();
+
+        return redirect()->route('etudiant.show', [
+            'matricule' => $student->matricule
+        ]);
+    }
+
+    public function searchView() {
+        return view('dashboard.etudiant.search');
     }
 }

@@ -36,11 +36,12 @@ Route::middleware('auth')->group(function () {
         Route::get('/', [StudentController::class, 'index'])->name('etudiant.index');
         Route::get('/create', [StudentController::class, 'create'])->name('etudiant.create');
         Route::post('/create', [StudentController::class, 'store'])->name('etudiant.store');
-        Route::get('/{matricule}/show', [StudentController::class, 'show'])->name('etudiant.show');
-        Route::get('/{matricule}/edit', [StudentController::class, 'edit'])->name('etudiant.edit');
-        Route::patch('/{matricule}/update', [StudentController::class, 'update'])->name('etudiant.update');
-        Route::get('/delete', [StudentController::class, 'deleteView'])->name('etudiant.delete');
-        Route::delete('/{matricule}/delete', [StudentController::class, 'destroy'])->name('etudiant.destroy');
+        Route::get('/show/{matricule}', [StudentController::class, 'show'])->name('etudiant.show');
+        Route::put('/update/{matricule}', [StudentController::class, 'update'])->name('etudiant.update');
+        Route::get('/delete/{matricule}', [StudentController::class, 'deleteView'])->name('etudiant.delete');
+        Route::delete('/delete/{matricule}', [StudentController::class, 'destroy'])->name('etudiant.destroy');
+        Route::post('/search', [StudentController::class, 'search'])->name('etudiant.search');
+        Route::get('/search', [StudentController::class, 'searchView'])->name('etudiant.searchView');
     });
 
 
@@ -48,11 +49,12 @@ Route::middleware('auth')->group(function () {
         Route::get('/', [ModuleController::class, 'index'])->name('module.index');
         Route::get('/create', [ModuleController::class, 'create'])->name('module.create');
         Route::post('/create', [ModuleController::class, 'store'])->name('module.store');
-        Route::get('/{code_m}/show', [ModuleController::class, 'show'])->name('module.show');
-        Route::get('/update', [ModuleController::class, 'edite'])->name('module.edite');
-        Route::patch('/{code_m}/update', [ModuleController::class, 'update'])->name('module.update');
-        Route::get('/delete', [ModuleController::class, 'deleteView'])->name('module.delete');
-        Route::delete('/{code_m}/delete', [ModuleController::class, 'destroy'])->name('module.destroy');
+        Route::get('/show/{code_m}', [ModuleController::class, 'show'])->name('module.show');
+        Route::put('/update/{code_m}', [ModuleController::class, 'update'])->name('module.update');
+        Route::get('/delete/{code_m}', [ModuleController::class, 'deleteView'])->name('module.delete');
+        Route::delete('/delete/{code_m}', [ModuleController::class, 'destroy'])->name('module.destroy');
+        Route::post('/search', [ModuleController::class, 'search'])->name('module.search');
+        Route::get('/search', [ModuleController::class, 'searchView'])->name('module.searchView');
     });
 });
 

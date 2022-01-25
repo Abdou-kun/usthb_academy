@@ -18,6 +18,8 @@ class Module extends Model
         'code_ens',
     ];
 
+    protected $primaryKey = 'code_m';
+
     public function enseignant() {
         return $this->belongsTo(Enseignant::class);
     }
