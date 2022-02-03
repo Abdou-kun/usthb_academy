@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\EnseignantController;
+use App\Http\Controllers\ExamenController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\ModuleController;
 use App\Models\Enseignant;
@@ -56,6 +57,6 @@ Route::middleware('auth')->group(function () {
         Route::post('/search', [ModuleController::class, 'search'])->name('module.search');
         Route::get('/search', [ModuleController::class, 'searchView'])->name('module.searchView');
     });
-});
 
-// [TO DO] : Modify option
+    Route::resource('examens', ExamenController::class)->only('create', 'store');
+});

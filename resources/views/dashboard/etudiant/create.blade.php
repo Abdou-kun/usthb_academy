@@ -1,6 +1,6 @@
 @extends('layouts.layout')
 
-@section('title', 'Create Enseignant')
+@section('title', 'Create Etudiant')
 
 @section('css')
 

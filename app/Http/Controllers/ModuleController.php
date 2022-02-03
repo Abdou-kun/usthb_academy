@@ -15,7 +15,9 @@ class ModuleController extends Controller
     public function index()
     {
         return view('dashboard.module.index', [
-            'modules' => Module::all()
+            'modules' => cache()->remember('users', now()->addSeconds(10), function () {
+            return Module::all();
+        })
         ]);
     }
 

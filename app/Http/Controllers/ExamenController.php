@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Module;
+use App\Models\Student;
 use Illuminate\Http\Request;
 
 class ExamenController extends Controller
@@ -13,7 +15,7 @@ class ExamenController extends Controller
      */
     public function index()
     {
-        //
+
     }
 
     /**
@@ -21,9 +23,12 @@ class ExamenController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Module $module, Student $student)
     {
-        //
+        return view('dashboard.examen.create', [
+            'module'=> $module,
+            'student' => $student
+        ]);
     }
 
     /**
